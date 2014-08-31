@@ -1,3 +1,5 @@
+var imagesLoaded = require('imagesloaded');
+
 // Fluidbox
 // Description: Replicating the seamless lightbox transition effect seen on Medium.com, with some improvements
 // Version: 1.3.2
@@ -277,7 +279,7 @@
 							left: $img.offset().left - $wrap.offset().left + parseInt($img.css('borderLeftWidth')) + parseInt($img.css('paddingLeft'))
 						});
 						$img.css({
-							opacity: 1
+							opacity: ''
 						});
 					}
 
@@ -337,25 +339,19 @@
 					.wrapInner($fbInnerWrap)
 					.find('img')
 					.css({
-						opacity: 1
+						opacity: ''
 					})
 					.after('<div class="fluidbox-ghost" />')
 					.each(function() {
-						var $img = $(this);
+						//var $img = $(this);
 
-						if ($img.width() > 0 && $img.height() > 0) {
-							// if image is already loaded (from cache)
+						imagesLoaded(this, function() {
 							funcCalc($fbItem);
-							$fbItem.click(fbClickHandler);
-						} else {
-							// wait for image to load
-							$img.load(function() {
+							$fbItem.click(fbClickHandler).hover(function() {
 								funcCalc($fbItem);
-								$fbItem.click(fbClickHandler);
 							});
-						}
+						});
 					});
-
 			}
 		});
 
