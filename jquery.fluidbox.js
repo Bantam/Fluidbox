@@ -195,6 +195,12 @@ var imagesLoaded = require('imagesloaded');
 							if ($(this).css('overflow') == 'hidden') {
 								$(this).css('overflow', 'visible').addClass('fluidbox-cleanup');
 							}
+
+							if ($(this).css('position') != 'absolute' && $(this).css('position') != 'fixed') {
+								$(this).css('position', 'relative');
+							}
+
+							$(this).css('z-index', 99999);
 						});
 
 						$('body').addClass('fluidbox-cleanup').css('overflow', 'hidden');
@@ -261,7 +267,9 @@ var imagesLoaded = require('imagesloaded');
 							$('.fluidbox-cleanup').css({
 								'perspective': '',
 								'transform': '',
-								'overflow': ''
+								'overflow': '',
+								'position': '',
+								'z-index': ''
 							}).removeClass('fluidbox-cleanup');
 						}, 250);
 
